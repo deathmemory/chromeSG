@@ -3,7 +3,7 @@
 // @version		 1.4.0
 // @author       zzdhidden@gmail.com
 // @namespace    https://github.com/zzdhidden
-// @description  12306 订票助手之(自动登录，自动查票，自动订单)
+// @description  description
 // @include      *://dynamic.12306.cn/otsweb/*
 // @require	https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
 // ==/UserScript== 
@@ -60,14 +60,16 @@ withjQuery(function ($, window)
 				if ( 0 == curCount )
 				{	// work finished .
 					//alert("building finished");
-					MM_xmlLoad('build.upgrade&bid=14&k2caa3s=01d4a27716f');
+					//MM_xmlLoad('build.upgrade&bid=14&k2caa3s=01d4a27716f');		//建筑
+					MM_xmlLoad('resources.detailup&resourceid=14&k029bes=54286b63eb4');		//资源
+					//MM_xmlLoad('build.upgrade&bid=51&k029bes=54286b63eb4');			//工厂
 					console.log("building finished !");
 					//return;	// stop timer
 				}
 				//MM_xmlLoad('horserace.dayFeed&horseid=8256');
 
 				console.log("tbody toggle, current building count :" + curCount);
-				setTimeout("timedCount(1000)",);	// 1203000
+				setTimeout("timedCount()", 1000);	// 1203000
 			}
 			console.log("document loaded !");
 			$(".chenmi").click(function(){
