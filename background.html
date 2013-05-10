@@ -1,0 +1,14 @@
+<html><body>
+		<script>
+			chrome.webRequest.onCompleted.addListener(
+			function(details) {
+				alert ("URL: " + details.url);
+			},
+			{
+				urls: ["*"],
+				types: ["main_frame"]
+			},
+			[]
+			);
+		</script>
+</body></html>
