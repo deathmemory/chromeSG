@@ -51,22 +51,22 @@ withjQuery(function ($, window)
 		$(document).ready(function()
 		{	
 			var arr = new Array(
-					['孙权','30687','94'],
-					['甘宁','39648','14'],
-					['廖珝','30684','100'],
-					['徐荣','40279','84'],
-					['单虎','33212','81'],
-					['张翼','33662','64'],
-					['张承','34353','52'],
-					['鲁甸','35066','42'],
-					['马忠','36720','27'],
-					['张嶷','37588','25'],
-					['昌充','37739','22'],
-					['钟离牧','37589','13'],
-					['乐续','40148','12'],
-					['邹豫','39172','9'],
-					['师覈','37984','8'],
-					['荀匡','38400','6']
+					//['孙权','30687',94],
+					['甘宁','39648',14],
+					//['廖珝','30684',100],
+					['徐荣','40279',84],
+					['单虎','33212',81],
+					['张翼','33662',65],
+					['张承','34353',53],
+					['鲁甸','35066',42],
+					['马忠','36720',27],
+					['张嶷','37588',26],
+					['昌充','37739',22],
+					['钟离牧','37589',13],
+					['乐续','40148',13],
+					['邹豫','39172',9],
+					['师覈','37984',9],
+					['荀匡','38400',7]
 					);
 			timedCount = function(){
 				//console.log("tbody toggle !");
@@ -89,10 +89,36 @@ withjQuery(function ($, window)
 				console.log("tbody toggle, current building count :" + curCount);
 				setTimeout("timedCount()", 1000);	// 1203000
 			}
-			var pkWuJiang = function(){
-					for (var i=0;i<arr.length;i++)
-						console.log("name:"+arr[i][0]+" len:"+arr.length);
-				}
+			var currentIndex = 0;
+			window.pkWuJiang = function(){
+//					for (var i=0;i<arr.length;i++)
+//					{
+				var intr = arr[currentIndex][2] + 2;
+				var wjUrl = "index.php?act=battalion.personal_war&city_id=9&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
+				console.log("cidx" + currentIndex + " url:"+ wjUrl);
+				$.get(wjUrl, function(data,status){
+					var ttt = $(data).find("htmls").find('#dialog').text();
+								
+								/*.each(function(i,val){
+									console.log(i);
+									console.log(val);
+									console.log(val.textContent);
+								}));*/
+//								var resData = data;
+//								var inzh = resData.indexOf("看不清");
+					var strRes = ttt.indexOf("请输入验证码");
+					console.log("res "+strRes);
+					if ( -1 != strRes )
+					{
+						alertDialog('battalion.personal_war&city_id=25&target_level='+intr+'&kffae7s=49fed0ec5fe&keep=all&gid='+arr[i][1],'军营武将狼牙将:黄口小儿也来挑战老子！');
+					}else{
+						currentIndex ++;
+						pkWuJiang();
+					}
+				});
+						//alertDialog('battalion.personal_war&city_id=25&target_level='+intr+'&kffae7s=49fed0ec5fe&keep=all&gid='+arr[i][1],'军营武将狼牙将:黄口小儿也来挑战老子！');
+//					}
+			}
 			//添加Button
 			var drawButton = function(){	
 				var imgobj = $(".subnav");
