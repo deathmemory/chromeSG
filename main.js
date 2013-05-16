@@ -92,9 +92,14 @@ withjQuery(function ($, window)
 			var currentIndex = 0;
 			window.pkWuJiang = function(){
 				var wjSize = arr.length;
+				if (currentIndex >= wjSize)
+				{
+					currentIndex = 0;
+					return;
+				}
 				var intr = arr[currentIndex][2] + 2;
 				var wjUrl = "index.php?act=battalion.personal_war&city_id=9&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
-				console.log("cidx" + currentIndex + "/"+wjSize+" url:"+ wjUrl);
+				console.log("cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
 				$.get(wjUrl, function(data,status){
 					var ttt = $(data).find("htmls").find('#dialog').text();
 					var strRes = ttt.indexOf("请输入验证码");
@@ -103,13 +108,8 @@ withjQuery(function ($, window)
 					{
 						alertDialog('battalion.personal_war&city_id=25&target_level='+intr+'&kffae7s=49fed0ec5fe&keep=all&gid='+arr[i][1],'军营武将狼牙将:黄口小儿也来挑战老子！');
 					}else{
-						if (currentIndex < wjSize)
-						{
-							currentIndex ++;
-							pkWuJiang();
-						}
-						else
-							currentIndex = 0;
+						currentIndex ++;
+						pkWuJiang();
 					}
 				});
 			}
