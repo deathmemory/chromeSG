@@ -1,4 +1,4 @@
-// ==UserScript==  
+﻿// ==UserScript==  
 // @name         12306 Booking Assistant
 // @version		 1.4.0
 // @author       zzdhidden@gmail.com
@@ -55,14 +55,14 @@ withjQuery(function ($, window)
 					['甘宁','39648',14],
 					//['廖珝','30684',100],
 					['徐荣','40279',84],
-					['单虎','33212',81],
+					['单虎','33212',87],
 					['张翼','33662',65],
 					['张承','34353',53],
 					['鲁甸','35066',42],
 					['马忠','36720',27],
 					['张嶷','37588',26],
 					['昌充','37739',22],
-					['钟离牧','37589',13],
+					['钟离牧','37589',14],
 					['乐续','40148',13],
 					['邹豫','39172',9],
 					['师覈','37984',9],
@@ -91,33 +91,27 @@ withjQuery(function ($, window)
 			}
 			var currentIndex = 0;
 			window.pkWuJiang = function(){
-//					for (var i=0;i<arr.length;i++)
-//					{
+				var wjSize = arr.length;
 				var intr = arr[currentIndex][2] + 2;
 				var wjUrl = "index.php?act=battalion.personal_war&city_id=9&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
-				console.log("cidx" + currentIndex + " url:"+ wjUrl);
+				console.log("cidx" + currentIndex + "/"+wjSize+" url:"+ wjUrl);
 				$.get(wjUrl, function(data,status){
 					var ttt = $(data).find("htmls").find('#dialog').text();
-								
-								/*.each(function(i,val){
-									console.log(i);
-									console.log(val);
-									console.log(val.textContent);
-								}));*/
-//								var resData = data;
-//								var inzh = resData.indexOf("看不清");
 					var strRes = ttt.indexOf("请输入验证码");
 					console.log("res "+strRes);
 					if ( -1 != strRes )
 					{
 						alertDialog('battalion.personal_war&city_id=25&target_level='+intr+'&kffae7s=49fed0ec5fe&keep=all&gid='+arr[i][1],'军营武将狼牙将:黄口小儿也来挑战老子！');
 					}else{
-						currentIndex ++;
-						pkWuJiang();
+						if (currentIndex < wjSize)
+						{
+							currentIndex ++;
+							pkWuJiang();
+						}
+						else
+							currentIndex = 0;
 					}
 				});
-						//alertDialog('battalion.personal_war&city_id=25&target_level='+intr+'&kffae7s=49fed0ec5fe&keep=all&gid='+arr[i][1],'军营武将狼牙将:黄口小儿也来挑战老子！');
-//					}
 			}
 			//添加Button
 			var drawButton = function(){	
