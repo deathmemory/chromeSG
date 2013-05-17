@@ -51,22 +51,22 @@ withjQuery(function ($, window)
 		$(document).ready(function()
 		{	
 			var arr = new Array(
-					//['孙权','30687',94],
-					['甘宁','39648',14],
+					['孙权','30687',95],
+					['甘宁','39648',16],
 					//['廖珝','30684',100],
-					['徐荣','40279',84],
-					['单虎','33212',87],
+					['徐荣','40279',85],
+					['单虎','33212',88],
 					['张翼','33662',65],
 					['张承','34353',53],
 					['鲁甸','35066',42],
-					['马忠','36720',27],
-					['张嶷','37588',26],
+					['马忠','36720',28],
+					['张嶷','37588',27],
 					['昌充','37739',22],
 					['钟离牧','37589',14],
 					['乐续','40148',13],
-					['邹豫','39172',9],
+					['邹豫','39172',10],
 					['师覈','37984',9],
-					['荀匡','38400',7]
+					['荀匡','38400',8]
 					);
 			timedCount = function(){
 				//console.log("tbody toggle !");
@@ -78,7 +78,7 @@ withjQuery(function ($, window)
 				if ( 0 == curCount )
 				{	// work finished .
 					//alert("building finished");
-					MM_xmlLoad('build.upgrade&bid=14&k2caa3s=01d4a27716f');		//建筑
+					MM_xmlLoad('build.upgrade&bid=4&k2caa3s=01d4a27716f');		//建筑
 					//MM_xmlLoad('resources.detailup&resourceid=14&k029bes=54286b63eb4');		//资源
 					//MM_xmlLoad('build.upgrade&bid=51&k029bes=54286b63eb4');			//工厂
 					console.log("building finished !");
@@ -95,11 +95,12 @@ withjQuery(function ($, window)
 				if (currentIndex >= wjSize)
 				{
 					currentIndex = 0;
+					alert("一轮挑战完成");
 					return;
 				}
 				var intr = arr[currentIndex][2] + 2;
 				var wjUrl = "index.php?act=battalion.personal_war&city_id=9&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
-				console.log("cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
+				console.log("name: " + arr[currentIndex][0] +"cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
 				$.get(wjUrl, function(data,status){
 					var ttt = $(data).find("htmls").find('#dialog').text();
 					var strRes = ttt.indexOf("请输入验证码");
