@@ -52,22 +52,22 @@ withjQuery(function ($, window)
 		$(document).ready(function()
 		{	
 			var arr = new Array(
-					['孙权','30687',98],
-					['甘宁','39648',18],
+					['孙权','30687',99],
+					['甘宁','39648',19],
 					//['廖珝','30684',100],
+					['单虎','33212',92],
 					['徐荣','40279',86],
-					['单虎','33212',91],
-					['张翼','33662',68],
+					['张翼','33662',69],
 					['张承','34353',56],
 					['鲁甸','35066',45],
-					['马忠','36720',30],
 					['张嶷','37588',35],
-					['昌充','37739',23],
-					['钟离牧','37589',17],
-					['乐续','40148',16],
-					['邹豫','39172',13],
-					['师覈','37984',11],
-					['荀匡','38400',9]
+					['马忠','36720',32],
+					['昌充','37739',24],
+					['钟离牧','37589',18],
+					['乐续','40148',17],
+					['邹豫','39172',14],
+					['师覈','37984',12],
+					['荀匡','38400',10]
 					);
 			timedCount = function(){
 				//console.log("tbody toggle !");
@@ -79,7 +79,7 @@ withjQuery(function ($, window)
 				if ( 0 == curCount )
 				{	//// work finished .
 					//alert("building finished");	return;
-					MM_xmlLoad('build.upgrade&bid=10&k2caa3s=01d4a27716f');		//建筑
+					MM_xmlLoad('build.upgrade&bid=6&k2caa3s=01d4a27716f');		//建筑
 					//MM_xmlLoad('resources.detailup&resourceid=14&k029bes=54286b63eb4');		//资源
 					//MM_xmlLoad('build.upgrade&bid=51&k029bes=54286b63eb4');			//工厂
 					console.log("building finished !");
