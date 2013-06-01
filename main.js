@@ -53,21 +53,23 @@ withjQuery(function ($, window)
 		{	
 			var arr = new Array(
 					['孙权','30687',100],
-					['甘宁','39648',20],
-					//['廖珝','30684',100],
-					['单虎','33212',92],
-					['徐荣','40279',86],
-					['张翼','33662',69],
-					['张承','34353',56],
-					['鲁甸','35066',45],
-					['张嶷','37588',35],
-					['马忠','36720',32],
-					['昌充','37739',24],
-					['钟离牧','37589',18], 
-					['乐续','40148',17],
-					['邹豫','39172',14],
-					['师覈','37984',12],
-					['荀匡','38400',10]
+					['甘宁','39648',25],
+					['廖珝','30684',100],
+					['单虎','33212',100],
+					['徐荣','40279',90],
+					['张翼','33662',75],
+					['张承','34353',62],
+					['张嶷','37588',51],
+					['鲁甸','35066',50],
+					['马忠','36720',39],
+					['昌充','37739',26],
+					['乐续','40148',23],
+					['钟离牧','37589',22], 
+					['师覈','37984',19],
+					['邹豫','39172',19],
+					['荀匡','38400',15],
+					['路舆','41186',1],
+					['沮圃','41389',1]
 					);
 			timedCount = function(){
 				//console.log("tbody toggle !");
@@ -79,8 +81,8 @@ withjQuery(function ($, window)
 				if ( 0 == curCount )
 				{	//// work finished .
 					//alert("building finished");	return;
-					MM_xmlLoad('build.upgrade&bid=6&k2caa3s=01d4a27716f');		//建筑
-					//MM_xmlLoad('resources.detailup&resourceid=14&k029bes=54286b63eb4');		//资源
+					MM_xmlLoad('build.upgrade&bid=25&k2caa3s=01d4a27716f');		//建筑
+					//MM_xmlLoad('resources.detailup&resourceid=8&k029bes=54286b63eb4');		//资源
 					//MM_xmlLoad('build.upgrade&bid=51&k029bes=54286b63eb4');			//工厂
 					console.log("building finished !");
 				}
@@ -99,7 +101,7 @@ withjQuery(function ($, window)
 					return;
 				}
 				var intr = arr[currentIndex][2] + 2;
-				var wjUrl = "index.php?act=battalion.personal_war&city_id=9&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
+				var wjUrl = "index.php?act=battalion.personal_war&city_id=19&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
 				console.log("name: " + arr[currentIndex][0] +"cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
 				var doit = function(){
 					$.get(wjUrl, function(data,status){
@@ -135,7 +137,7 @@ withjQuery(function ($, window)
 				obj.css("background-color","red");
 				obj.text("喂中");
 				//循环
-				var wmUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=8256&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
+				var wmUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=8653&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
 				$.get(wmUrl, function(data, status){
 					var bContinue = true;
 					var resWM = $(data).find("game").find('locat').text();
