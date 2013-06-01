@@ -57,16 +57,16 @@ withjQuery(function ($, window)
 					['廖珝','30684',100],
 					['单虎','33212',100],
 					['徐荣','40279',90],
-					['张翼','33662',75],
-					['张承','34353',62],
+					['张翼','33662',76],
+					['张承','34353',63],
 					['张嶷','37588',51],
 					['鲁甸','35066',50],
-					['马忠','36720',39],
+					['马忠','36720',43],
 					['昌充','37739',26],
 					['乐续','40148',23],
 					['钟离牧','37589',22], 
-					['师覈','37984',19],
-					['邹豫','39172',19],
+					['师覈','37984',20],
+					['邹豫','39172',20],
 					['荀匡','38400',15],
 					['路舆','41186',1],
 					['沮圃','41389',1]
@@ -159,11 +159,45 @@ withjQuery(function ($, window)
 						console.log("喂完, 停止计时");
 				});
 			}	
+			//战争预警
+			window.warWarnning = function(){
+					var bAttacked = false;
+					var obj = $(".subnav [dm='yujing']");
+					obj.css("background-color","red");
+					obj.text("警中");
+					MM_xmlLoad('vmanage.status');
+					$("tbody tr").each(function(){
+						$(this).find(".green").each(function(){
+							var text = $(this).attr("onclick");
+							if ( -1 != text.indexOf('vmanage') )
+							{
+								window.vmname = $(this).text();
+								return;
+							}
+						});
+						attactedcount = $(this).find("strong").text();
+						console.log(window.vmname + "\t\t" + attactedcount);
+						if (0 != attactedcount)
+						{//被攻击，开始报警
+							bAttacked = true;
+							obj.text("被攻击");
+							return false;
+						}
+					});
+					if (! bAttacked )
+						setTimeout("warWarnning()", 10000);
+					else
+					{
+						var musicurl = "http://down.srworld.net/music/single/P4/eva6.mp3?stdfrom=3%20";
+						window.open(musicurl,'','height=600,width=800,scrollbars=yes,status =yes');
+					}
+			}
 			//添加Button
 			var drawButton = function(){	
 				var imgobj = $(".subnav");
 				imgobj.prepend("<a dm=\"weima\" href=\"javascript:void(0);\" onclick=\"weima();\">喂马</a>");
 				imgobj.prepend("<a href=\"javascript:void(0);\" onclick=\"pkWuJiang();\">武将</a>");
+				imgobj.prepend("<a dm=\"yujing\" id=\"div2\" href=\"javascript:void(0);\" onclick=\"warWarnning();\">预警</a>");
 				//document.write("<iframe><input type=button value=\"Go Back\"onClick=\"history.back(-1)\" ></iframe>");
 				console.log('drawButton done ' + imgobj.length);
 			}
