@@ -178,7 +178,7 @@ withjQuery(function ($, window)
 						});
 						attactedcount = $(this).find("strong").text();
 						console.log(window.vmname + "\t\t" + attactedcount);
-						if (0 != attactedcount)
+						if ( ! isNaN(attactedcount) && 0 != attactedcount)
 						{//被攻击，开始报警
 							bAttacked = true;
 							obj.text("被攻击");
