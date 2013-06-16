@@ -53,23 +53,24 @@ withjQuery(function ($, window)
 		{	
 			var arr = new Array(
 					['孙权','30687',100],
-					['甘宁','39648',25],
+					['甘宁','39648',28],
 					['廖珝','30684',100],
 					['单虎','33212',100],
-					['徐荣','40279',90],
-					['张翼','33662',76],
-					['张承','34353',63],
-					['张嶷','37588',51],
-					['鲁甸','35066',50],
-					['马忠','36720',43],
-					['昌充','37739',26],
-					['乐续','40148',23],
-					['钟离牧','37589',22], 
-					['师覈','37984',20],
+					['徐荣','40279',94],
+					['张翼','33662',82],
+					['张承','34353',69],
+					['张嶷','37588',56],
+					['鲁甸','35066',52],
+					['马忠','36720',52],
+					['昌充','37739',28],
+					['乐续','40148',26],
+					['钟离牧','37589',24], 
+					['师覈','37984',22],
 					['邹豫','39172',20],
-					['荀匡','38400',15],
-					['路舆','41186',1],
-					['沮圃','41389',1]
+					['荀匡','38400',18],
+					['沮圃','41389',8],
+					['路舆','41186',3],
+					['圆月','42472',3]
 					);
 			timedCount = function(){
 				//console.log("tbody toggle !");
@@ -81,7 +82,7 @@ withjQuery(function ($, window)
 				if ( 0 == curCount )
 				{	//// work finished .
 					//alert("building finished");	return;
-					MM_xmlLoad('build.upgrade&bid=25&k2caa3s=01d4a27716f');		//建筑
+					MM_xmlLoad('build.upgrade&bid=26&k2caa3s=01d4a27716f');		//建筑
 					//MM_xmlLoad('resources.detailup&resourceid=8&k029bes=54286b63eb4');		//资源
 					//MM_xmlLoad('build.upgrade&bid=51&k029bes=54286b63eb4');			//工厂
 					console.log("building finished !");
@@ -137,7 +138,7 @@ withjQuery(function ($, window)
 				obj.css("background-color","red");
 				obj.text("喂中");
 				//循环
-				var wmUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=8653&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
+				var wmUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=8874&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
 				$.get(wmUrl, function(data, status){
 					var bContinue = true;
 					var resWM = $(data).find("game").find('locat').text();
@@ -185,7 +186,7 @@ withjQuery(function ($, window)
 						}
 					});
 					if (! bAttacked )
-						setTimeout("warWarnning()", 10000);
+						setTimeout("warWarnning()", 60000);
 					else
 					{
 						var musicurl = "http://down.srworld.net/music/single/P4/eva6.mp3?stdfrom=3%20";
