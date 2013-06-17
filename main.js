@@ -1,13 +1,3 @@
-// ==UserScript==  
-// @name         12306 Booking Assistant
-// @version		 1.4.0
-// @author       zzdhidden@gmail.com
-// @namespace    https://github.com/zzdhidden
-// @description  description
-// @include      *://dynamic.12306.cn/otsweb/*
-// @require	https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
-// ==/UserScript== 
-
 function withjQuery(callback, safe){
 	if (window.location.href != "http://x89.sanguo.renren.com/")
 		return;
