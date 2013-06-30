@@ -20,7 +20,7 @@ function withjQuery(callback, safe){
 			var cb = document.createElement("script");
 			cb.type = "text/javascript";
 			cb.textContent = "jQuery.noConflict();(" + callback.toString() + ")(jQuery, window);";
-			script.addEventListener('load', function() {
+			script.addEventListener('load', function() { 
 				document.head.appendChild(cb);
 			});
 		}
@@ -29,11 +29,7 @@ function withjQuery(callback, safe){
 			if(typeof($) != "undefined") dollar = $;
 			script.addEventListener('load', function() {
 				jQuery.noConflict();
-<<<<<<< HEAD
-				$ = dollar;
-=======
 				$ = dollar; 
->>>>>>> 14754010be48ee8b0287602204900b9e08988567
 				callback(jQuery, window);
 			});
 		}
