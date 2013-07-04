@@ -1,11 +1,9 @@
-// ==UserScript==  
-// @name         12306 Booking Assistant
-// @version		 1.4.0
-// @author       zzdhidden@gmail.com
-// @namespace    https://github.com/zzdhidden
-// @description  description
-// @include      *://dynamic.12306.cn/otsweb/*
-// @require	https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
+// ==UserScript==
+// @name: 		sanguofengyun2 helper
+// @version:	v1.2
+// @author:		DeathMemory
+// @email:		DeathMemory@163.com
+// @update:		2013/07/03
 // ==/UserScript== 
 
 function withjQuery(callback, safe){
@@ -51,6 +49,14 @@ withjQuery(function ($, window)
 	{
 		$(document).ready(function()
 		{	
+			//喂马Url
+			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9113&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
+			//押镖Url
+			window.yabiaoUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.escort&horseid=9113&escortid=145432&userid=10876&villageid=14662&w6aau=aaac2a9&rand=93531";
+			//自动建筑
+			window.bdtype = 0;	// 0 建筑 1 资源 2 工厂
+			window.bdid = 0;	// 对应修建的 Id
+
 			var arr = new Array(
 					['孙权','30687',100],
 					['甘宁','39648',31],
@@ -84,13 +90,14 @@ withjQuery(function ($, window)
 				if ( 0 == curCount )
 				{	//// work finished .
 					//alert("building finished");	return;
-					//MM_xmlLoad('build.upgrade&bid=12&k2caa3s=01d4a27716f');		//建筑
-					MM_xmlLoad('resources.detailup&resourceid=12&k029bes=54286b63eb4');		//资源
-					//MM_xmlLoad('build.upgrade&bid=50&k029bes=54286b63eb4');			//工厂
+					if (0 == window.bdtype)
+						MM_xmlLoad('build.upgrade&bid='+window.bdid+'&k2caa3s=01d4a27716f');					//建筑
+					else if (1 == window.bdtype)
+						MM_xmlLoad('resources.detailup&resourceid='+window.bdid+'&k029bes=54286b63eb4');		//资源
+					else if (2 == window.bdtype)
+						MM_xmlLoad('build.upgrade&bid='+window.bdid+'&k029bes=54286b63eb4');					//工厂
 					console.log("building finished !");
 				}
-				//MM_xmlLoad('horserace.dayFeed&horseid=8256');
-
 				console.log("tbody toggle, current building count :" + curCount);
 				setTimeout("timedCount()", 1000);	// 1203000
 			}
@@ -135,31 +142,25 @@ withjQuery(function ($, window)
 						pkWuJiang();
 				}
 			}
+			window.yabiao = 0;
 			window.weima = function (){
 				var obj = $(".subnav [dm='weima']");
 				obj.css("background-color","red");
 				obj.text("喂中");
 				//循环
-				var wmUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9113&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
-				$.get(wmUrl, function(data, status){
+				$.get(window.weimaUrl, function(data, status){
 					var bContinue = true;
 					var resWM = $(data).find("game").find('locat').text();
-					if ( -1 != resWM.indexOf("距离下次操作时间") )
-					{
+					if ( -1 != resWM.indexOf("距离下次操作时间") ){
 						console.log(resWM);
-					}
-					else if ( -1 != resWM.indexOf("您的帐户中金币余额不足") )
-					{
+					}else if ( -1 != resWM.indexOf("您的帐户中金币余额不足") ){
 						obj.text("喂完");
-						bContinue = false;
 					}
-					if ( bContinue )
-					{
-						console.log("还在喂");
-						setTimeout("weima()", 1203000);
+					if ( window.yabiao++ % 3 == 0 ){	//押镖暂时设定是 1次/小时
+						$.get(window.yabiaoUrl);
+						obj.text("运"+((window.yabiao - window.yabiao % 3) / 3 + 1));
 					}
-					else
-						console.log("喂完, 停止计时");
+					setTimeout("weima()", 1203000);
 				});
 			}	
 			//战争预警
