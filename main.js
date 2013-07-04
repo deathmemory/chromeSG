@@ -51,8 +51,8 @@ withjQuery(function ($, window)
 		{	
 			//喂马Url
 			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9113&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
-			//押镖Url
-			window.yabiaoUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.escort&horseid=9113&escortid=145432&userid=10876&villageid=14662&w6aau=aaac2a9&rand=93531";
+			//押镖 horseid
+			window.horseid = 9113;
 			//自动建筑
 			window.bdtype = 0;	// 0 建筑 1 资源 2 工厂
 			window.bdid = 0;	// 对应修建的 Id
@@ -156,12 +156,16 @@ withjQuery(function ($, window)
 					}else if ( -1 != resWM.indexOf("您的帐户中金币余额不足") ){
 						obj.text("喂完");
 					}
-					if ( window.yabiao++ % 3 == 0 ){	//押镖暂时设定是 1次/小时
-						$.get(window.yabiaoUrl);
-						obj.text("运"+((window.yabiao - window.yabiao % 3) / 3 + 1));
-					}
-					setTimeout("weima()", 1203000);
 				});
+				MM_xmlLoad('horserace.guardlist&horseid=' + window.horseid);
+				obj.text("运"+((window.yabiao - window.yabiao % 3) / 3 + 1));
+				$("div a.btn_tz").each(function(){
+					if (-1 != $(this).text().indexOf('押镖')){
+						console.log($(this).text());
+						$(this).click();						
+					}
+				});
+				setTimeout("weima()", 1203000);
 			}	
 			//战争预警
 			window.warWarnning = function(){
