@@ -225,33 +225,3 @@ withjQuery(function ($, window)
 		})
 	}
 }, true);
-/*
-if (window.location.href == "http://x89.sanguo.renren.com/")
-{
-	
-	//alert("test");
-	console.log("load dmhelper");
-	var rightcontent = document.getElementById("rightcontent");
-	console.log("rightcontent length : " + rightcontent.length);
-	var elements = indexqueue.getElementsByTagName("span");
-	//var len = elements.length;
-	console.log("element length : " + document.getElementsByTagName("A")[0].href);
-	
-	/*
-	for (var i = 0; i < elements.length; ++i)
-	{
-		var a = elements[i];
-		a.onclick = function() { return true; };
-
-		// 获取 taskid
-		var par = a.parentElement.parentElement.parentElement;
-		var id = par.getAttribute("taskid");
-
-		// 填充地址
-		var addr = document.getElementById ("dl_url" + id).value;
-		a.href = addr;
-	}
-	
-}
-*/
-
