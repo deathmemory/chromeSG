@@ -225,5 +225,3 @@ withjQuery(function ($, window)
 		})
 	}
 }, true);
-
-
