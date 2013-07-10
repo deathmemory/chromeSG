@@ -4,7 +4,7 @@
 // @author:		DeathMemory
 // @email:		DeathMemory@163.com
 // @update:		2013/07/03
-// ==/UserScript== 
+// ==/UserScript==
 
 function withjQuery(callback, safe){
 	if (window.location.href != "http://x89.sanguo.renren.com/")
@@ -18,7 +18,7 @@ function withjQuery(callback, safe){
 			var cb = document.createElement("script");
 			cb.type = "text/javascript";
 			cb.textContent = "jQuery.noConflict();(" + callback.toString() + ")(jQuery, window);";
-			script.addEventListener('load', function() { 
+			script.addEventListener('load', function() {
 				document.head.appendChild(cb);
 			});
 		}
@@ -27,7 +27,7 @@ function withjQuery(callback, safe){
 			if(typeof($) != "undefined") dollar = $;
 			script.addEventListener('load', function() {
 				jQuery.noConflict();
-				$ = dollar; 
+				$ = dollar;
 				callback(jQuery, window);
 			});
 		}
@@ -48,7 +48,7 @@ withjQuery(function ($, window)
 	if (window.location.href == "http://x89.sanguo.renren.com/")
 	{
 		$(document).ready(function()
-		{	
+		{
 			//喂马Url
 			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9113&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
 			//押镖 horseid
@@ -70,7 +70,7 @@ withjQuery(function ($, window)
 					['马忠','36720',54],
 					['乐续','40148',31],
 					['昌充','37739',30],
-					['钟离牧','37589',25], 
+					['钟离牧','37589',25],
 					['师覈','37984',24],
 					['邹豫','39172',24],
 					['荀匡','38400',22],
@@ -162,11 +162,11 @@ withjQuery(function ($, window)
 				$("div a.btn_tz").each(function(){
 					if (-1 != $(this).text().indexOf('押镖')){
 						console.log($(this).text());
-						$(this).click();						
+						$(this).click();
 					}
 				});
 				setTimeout("weima()", 1203000);
-			}	
+			}
 			//战争预警
 			window.warWarnning = function(){
 					var bAttacked = false;
@@ -201,7 +201,7 @@ withjQuery(function ($, window)
 					}
 			}
 			//添加Button
-			var drawButton = function(){	
+			var drawButton = function(){
 				var imgobj = $(".subnav");
 				imgobj.prepend("<a dm=\"weima\" href=\"javascript:void(0);\" onclick=\"weima();\">喂马</a>");
 				imgobj.prepend("<a href=\"javascript:void(0);\" onclick=\"pkWuJiang();\">武将</a>");
@@ -225,33 +225,5 @@ withjQuery(function ($, window)
 		})
 	}
 }, true);
-/*
-if (window.location.href == "http://x89.sanguo.renren.com/")
-{
-	
-	//alert("test");
-	console.log("load dmhelper");
-	var rightcontent = document.getElementById("rightcontent");
-	console.log("rightcontent length : " + rightcontent.length);
-	var elements = indexqueue.getElementsByTagName("span");
-	//var len = elements.length;
-	console.log("element length : " + document.getElementsByTagName("A")[0].href);
-	
-	/*
-	for (var i = 0; i < elements.length; ++i)
-	{
-		var a = elements[i];
-		a.onclick = function() { return true; };
 
-		// 获取 taskid
-		var par = a.parentElement.parentElement.parentElement;
-		var id = par.getAttribute("taskid");
-
-		// 填充地址
-		var addr = document.getElementById ("dl_url" + id).value;
-		a.href = addr;
-	}
-	
-}
-*/
 
