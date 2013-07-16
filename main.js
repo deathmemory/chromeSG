@@ -55,7 +55,7 @@ withjQuery(function ($, window)
 			window.horseid = 9113;
 			//自动建筑
 			window.bdtype = 0;	// 0 建筑 1 资源 2 工厂
-			window.bdid = 0;	// 对应修建的 Id
+			window.bdid = 14;	// 对应修建的 Id
 
 			var arr = new Array(
 					['孙权','30687',100],
@@ -111,24 +111,19 @@ withjQuery(function ($, window)
 					return;
 				}
 				var intr = arr[currentIndex][2] + 2;
-				var wjUrl = "index.php?act=battalion.personal_war&city_id=19&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
+				var wjUrl = "index.php?act=battalion.personal_war&city_id=10&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
 				console.log("name: " + arr[currentIndex][0] +"cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
 				var doit = function(){
 					$.get(wjUrl, function(data,status){
 						var resYZ = $(data).find("htmls").find('#dialog').text();
 						var resCD = $(data).find("game").find('locat').text();
 						//console.log("resCD:"+resCD);
-						if ( -1 != resYZ.indexOf("请输入验证码") )
-						{
+						if ( -1 != resYZ.indexOf("请输入验证码") ){
 							alertDialog('battalion.personal_war&city_id=25&target_level='+intr+'&kffae7s=49fed0ec5fe&keep=all&gid='+arr[i][1],'军营武将狼牙将:黄口小儿也来挑战老子！');
-						}
-						else if ( -1 != resCD.indexOf("解除CD时间") )
-						{
+						}else if ( -1 != resCD.indexOf("解除CD时间") ){
 							currentIndex = 0;	//不必再向下循环，直接归0重新等待计数就可以
 							MM_xmlLoad('battalion.show_map');
-						}
-						else
-						{
+						}else{
 							currentIndex ++;
 							pkWuJiang();
 						}
