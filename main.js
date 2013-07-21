@@ -50,36 +50,14 @@ withjQuery(function ($, window)
 		$(document).ready(function()
 		{
 			//喂马Url
-			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9113&userid=10876&villageid=14662&w180u=80608b2&rand=569687";
+			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9354&userid=10876&villageid=14662&w7e1u=e10f24f&rand=203983";
 			//押镖 horseid
-			window.horseid = 9113;
+			window.horseid = 9354;
 			//自动建筑
 			window.bdtype = 0;	// 0 建筑 1 资源 2 工厂
-			window.bdid = 14;	// 对应修建的 Id
+			window.bdid = 15;	// 对应修建的 Id
 
-			var arr = new Array(
-					['孙权','30687',100],
-					['甘宁','39648',31],
-					['廖珝','30684',100],
-					['单虎','33212',100],
-					['徐荣','40279',97],
-					['张翼','33662',87],
-					['张承','34353',76],
-					['鲁甸','35066',60],
-					['张嶷','37588',58],
-					['马忠','36720',54],
-					['乐续','40148',31],
-					['昌充','37739',30],
-					['钟离牧','37589',25],
-					['师覈','37984',24],
-					['邹豫','39172',24],
-					['荀匡','38400',22],
-					['圆月','42472',17],
-					['沮圃','41389',10],
-					['祖茂','43536',6],
-					['路舆','41186',4],
-					['柳淮','43537',1]
-					);
+			var arr = new Array();
 			timedCount = function(){
 				//console.log("tbody toggle !");
 				var obj = ".building span[act='index.queueinfo']";
@@ -102,24 +80,56 @@ withjQuery(function ($, window)
 				setTimeout("timedCount()", 1000);	// 1203000
 			}
 			var currentIndex = 0;
+			window.getWuJiang = function(){
+				MM_xmlLoad('general.detail&itemcate=equip');
+				console.log($("#general_name_list li").size());
+				var wjIdx = 0;
+				$("#general_name_list li").not("#focus_exception").each(function(wjIdx){
+					var cellidx = 0;
+					var clkval = $(this).find("a"[0]).attr("onclick");
+					clkval = clkval.substring(clkval.indexOf("&gid=")+5,clkval.indexOf("&no_glist"));
+					arr[wjIdx] = new Array();
+					arr[wjIdx][cellidx] = clkval;
+					console.log(clkval + " => " + cellidx);
+					$(this).find("span").each(function(cellidx){
+						cellidx++;
+						arr[wjIdx][cellidx] = $(this).text();
+						console.log(arr[wjIdx][cellidx] + " => " + cellidx);
+					});
+					wjIdx++;
+				});
+				if ( 0 == arr.length ){
+					setTimeout("window.getWuJiang()", 1000);
+				}else{
+					for(var num = 0; num < arr.length; ++num){
+						console.log("gid:" + arr[num][0] + " name:" + arr[num][1] + " level:" + arr[num][2]);
+					}
+				}
+			}
 			window.pkWuJiang = function(){
 				var wjSize = arr.length;
-				if (currentIndex >= wjSize)
-				{
+				if ( 0 == wjSize ){
+					console.log("wujiang is nil");
+					window.getWuJiang();
+					return;
+				}
+				if (currentIndex >= wjSize){
 					currentIndex = 0;
 					alert("一轮挑战完成");
 					return;
 				}
-				var intr = arr[currentIndex][2] + 2;
-				var wjUrl = "index.php?act=battalion.personal_war&city_id=10&target_level="+intr+"&kffae7s=49fed0ec5fe&keep=all&gid="+arr[currentIndex][1]+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
-				console.log("name: " + arr[currentIndex][0] +"cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
+				var tgtlevel = parseInt(arr[currentIndex][2]) + 2;
+				var gid = arr[currentIndex][0];
+				var name = arr[currentIndex][1];
+				var wjUrl = "index.php?act=battalion.personal_war&city_id=10&target_level="+tgtlevel+"&kffae7s=49fed0ec5fe&keep=all&gid="+gid+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
+				console.log("name: " + name +"cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
 				var doit = function(){
 					$.get(wjUrl, function(data,status){
 						var resYZ = $(data).find("htmls").find('#dialog').text();
 						var resCD = $(data).find("game").find('locat').text();
 						//console.log("resCD:"+resCD);
 						if ( -1 != resYZ.indexOf("请输入验证码") ){
-							alertDialog('battalion.personal_war&city_id=25&target_level='+intr+'&kffae7s=49fed0ec5fe&keep=all&gid='+arr[i][1],'军营武将狼牙将:黄口小儿也来挑战老子！');
+							alertDialog('battalion.personal_war&city_id=25&target_level='+tgtlevel+'&kffae7s=49fed0ec5fe&keep=all&gid='+gid,'军营武将狼牙将:黄口小儿也来挑战老子！');
 						}else if ( -1 != resCD.indexOf("解除CD时间") ){
 							currentIndex = 0;	//不必再向下循环，直接归0重新等待计数就可以
 							MM_xmlLoad('battalion.show_map');
@@ -132,7 +142,7 @@ withjQuery(function ($, window)
 				if ( arr[currentIndex][2] < 100 )
 					doit();
 				else{
-					console.log(arr[currentIndex][0]+"="+arr[currentIndex][2]+" 不加入挑战");
+					console.log(name+"="+arr[currentIndex][2]+" 不加入挑战");
 					currentIndex ++;
 						pkWuJiang();
 				}
