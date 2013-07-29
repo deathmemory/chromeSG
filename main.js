@@ -40,7 +40,7 @@ function withjQuery(callback, safe){
 	}
 }
 
-var timedCount;
+var autoBuild;
 var curCount = 0;
 
 withjQuery(function ($, window)
@@ -55,10 +55,10 @@ withjQuery(function ($, window)
 			window.horseid = 9354;
 			//自动建筑
 			window.bdtype = 0;	// 0 建筑 1 资源 2 工厂
-			window.bdid = 15;	// 对应修建的 Id
+			window.bdid = 8;	// 对应修建的 Id
 
 			var arr = new Array();
-			timedCount = function(){
+			autoBuild = function(){
 				//console.log("tbody toggle !");
 				var obj = ".building span[act='index.queueinfo']";
 				//$(obj).toggle();
@@ -77,8 +77,22 @@ withjQuery(function ($, window)
 					console.log("building finished !");
 				}
 				console.log("tbody toggle, current building count :" + curCount);
-				setTimeout("timedCount()", 1000);	// 1203000
+				setTimeout("autoBuild()", 1000);	// 1203000
 			}
+			window.doTimefunc = function(){
+				var mydate = new Date();
+				var hour = mydate.getHours();
+				var minute = mydate.getMinutes();
+				var second = mydate.getSeconds();
+				console.log("h:"+mydate.getHours()+"m:"+mydate.getMinutes()+"s:"+mydate.getSeconds());
+				if (hour == 5 && minute == 7 && second == 59){
+					MM_xmlLoad('hermithouse.backall&_uintgid=4246141&_uintvid=16832');
+					console.log("do the job!");
+					return;
+				}
+				setTimeout("window.doTimefunc()", 1000);
+			}
+			window.doTimefunc();
 			var currentIndex = 0;
 			window.getWuJiang = function(){
 				MM_xmlLoad('general.detail&itemcate=equip');
@@ -219,7 +233,7 @@ withjQuery(function ($, window)
 			$(".chenmi").click(function(){
 					console.log("click");
 					//if ( 0 == curCount )
-						timedCount();
+						autoBuild();
 			});
 			/*
 			$("#nav_js").click(function(){
