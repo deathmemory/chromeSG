@@ -12,7 +12,7 @@ function withjQuery(callback, safe){
 	if(typeof(jQuery) == "undefined") {
 		var script = document.createElement("script");
 		script.type = "text/javascript";
-		script.src = "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js";
+		script.src = "http://code.jquery.com/jquery-1.10.2.min.js";
 		//script.src = "http://code.jquery.com/jquery-1.9.1.min.js";
 		if(safe) {
 			var cb = document.createElement("script");
@@ -50,9 +50,9 @@ withjQuery(function ($, window)
 		$(document).ready(function()
 		{
 			//喂马Url
-			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9354&userid=10876&villageid=14662&w7e1u=e10f24f&rand=203983";
+			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9572&userid=10876&villageid=14662&wfd4u=d474492&rand=516570";
 			//押镖 horseid
-			window.horseid = 9354;
+			window.horseid = 9572;
 			//自动建筑
 			window.bdtype = 0;	// 0 建筑 1 资源 2 工厂
 			window.bdid = 8;	// 对应修建的 Id
@@ -85,8 +85,9 @@ withjQuery(function ($, window)
 				var minute = mydate.getMinutes();
 				var second = mydate.getSeconds();
 				console.log("h:"+mydate.getHours()+"m:"+mydate.getMinutes()+"s:"+mydate.getSeconds());
-				if (hour == 5 && minute == 7 && second == 59){
-					MM_xmlLoad('hermithouse.backall&_uintgid=4246141&_uintvid=16832');
+				if (hour == 3 && minute == 1 && second == 1){
+					//MM_xmlLoad('hermithouse.backall&_uintgid=4246141&_uintvid=16832');
+					$.get("http://x89.sanguo.renren.com/index.php?act=hermithouse.hoard&villageid=14662&_uintgid=&_uintvid=&_uintSoldier_num0=&_uintSoldier_num1=4990&_uintSoldier_num2=&_uintSoldier_num3=&_uintSoldier_num4=&_uintSoldier_num9=&_uintSoldier_num10=&_uintSoldier_num11=&_uintSoldier_num30=&_uintSoldier_num31=&_uintSoldier_num32=&_uintSoldier_num33=");
 					console.log("do the job!");
 					return;
 				}
@@ -184,8 +185,10 @@ withjQuery(function ($, window)
 						$(this).click();
 					}
 				});
+				console.log("do weima");
 				setTimeout("weima()", 1203000);
 			}
+			window.weima();
 			//战争预警
 			window.warWarnning = function(){
 					var bAttacked = false;
