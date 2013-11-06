@@ -7,7 +7,7 @@
 // ==/UserScript==
 
 function withjQuery(callback, safe){
-	if (window.location.href != "http://x89.sanguo.renren.com/")
+	if (window.location.href != "http://h22.sanguo.renren.com/")
 		return;
 	if(typeof(jQuery) == "undefined") {
 		var script = document.createElement("script");
@@ -45,17 +45,18 @@ var curCount = 0;
 
 withjQuery(function ($, window)
 {
-	if (window.location.href == "http://x89.sanguo.renren.com/")
+	if (window.location.href == "http://h22.sanguo.renren.com/")
 	{
 		$(document).ready(function()
 		{
+			window.userid = 10625;	// user id
+			window.villageid = 22058; // village id
+			window.horseid = 25971;	//押镖 horseid
 			//喂马Url
-			window.weimaUrl = "http://x89.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=9572&userid=10876&villageid=14662&wfd4u=d474492&rand=516570";
-			//押镖 horseid
-			window.horseid = 9572;
+			window.weimaUrl = "http://h22.sanguo.renren.com/index.php?act=horserace.dayFeed&horseid=" + window.horseid + "&userid=" + window.userid + "&villageid=" + window.villageid + "&we9eu=9ea2e75&rand=802114";
 			//自动建筑
 			window.bdtype = 0;	// 0 建筑 1 资源 2 工厂
-			window.bdid = 8;	// 对应修建的 Id
+			window.bdid = 16;	// 对应修建的 Id
 
 			var arr = new Array();
 			autoBuild = function(){
@@ -79,7 +80,7 @@ withjQuery(function ($, window)
 				console.log("tbody toggle, current building count :" + curCount);
 				setTimeout("autoBuild()", 1000);	// 1203000
 			}
-			window.doTimefunc = function(){
+			window.doTimefunc = function(){	// onload
 				var mydate = new Date();
 				var hour = mydate.getHours();
 				var minute = mydate.getMinutes();
@@ -87,7 +88,7 @@ withjQuery(function ($, window)
 				console.log("h:"+mydate.getHours()+"m:"+mydate.getMinutes()+"s:"+mydate.getSeconds());
 				if (hour == 3 && minute == 1 && second == 1){
 					//MM_xmlLoad('hermithouse.backall&_uintgid=4246141&_uintvid=16832');
-					$.get("http://x89.sanguo.renren.com/index.php?act=hermithouse.hoard&villageid=14662&_uintgid=&_uintvid=&_uintSoldier_num0=&_uintSoldier_num1=4990&_uintSoldier_num2=&_uintSoldier_num3=&_uintSoldier_num4=&_uintSoldier_num9=&_uintSoldier_num10=&_uintSoldier_num11=&_uintSoldier_num30=&_uintSoldier_num31=&_uintSoldier_num32=&_uintSoldier_num33=");
+					$.get("http://h22.sanguo.renren.com/index.php?act=hermithouse.hoard&villageid=14662&_uintgid=&_uintvid=&_uintSoldier_num0=&_uintSoldier_num1=4990&_uintSoldier_num2=&_uintSoldier_num3=&_uintSoldier_num4=&_uintSoldier_num9=&_uintSoldier_num10=&_uintSoldier_num11=&_uintSoldier_num30=&_uintSoldier_num31=&_uintSoldier_num32=&_uintSoldier_num33=");
 					console.log("do the job!");
 					return;
 				}
@@ -136,7 +137,7 @@ withjQuery(function ($, window)
 				var tgtlevel = parseInt(arr[currentIndex][2]) + 2;
 				var gid = arr[currentIndex][0];
 				var name = arr[currentIndex][1];
-				var wjUrl = "index.php?act=battalion.personal_war&city_id=10&target_level="+tgtlevel+"&kffae7s=49fed0ec5fe&keep=all&gid="+gid+"&userid=10876&villageid=14662&w6c2u=c24fe54&rand=821022";
+				var wjUrl = "index.php?act=battalion.personal_war&city_id=10&target_level="+tgtlevel+"&kffae7s=49fed0ec5fe&keep=all&gid="+gid+"&userid=" + window.userid + "&villageid=" + window.villageid + "&w6c2u=c24fe54&rand=821022";
 				console.log("name: " + name +"cidx: " + currentIndex + "/"+wjSize+" url:"+ wjUrl);
 				var doit = function(){
 					$.get(wjUrl, function(data,status){
@@ -188,7 +189,6 @@ withjQuery(function ($, window)
 				console.log("do weima");
 				setTimeout("weima()", 1203000);
 			}
-			window.weima();
 			//战争预警
 			window.warWarnning = function(){
 					var bAttacked = false;
